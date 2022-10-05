@@ -8,4 +8,8 @@ export default {
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.xtx-home-page {
+  height: 500px;
+}
+</style>
