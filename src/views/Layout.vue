@@ -1,20 +1,24 @@
 <template>
-  <!-- app-top-nav -->
-  <app-top-nav></app-top-nav>
-  <!-- app-header -->
-  <app-header></app-header>
-  <main>
+  <!-- 顶部通栏 -->
+  <AppTopNav></AppTopNav>
+  <!-- 头部组件 -->
+  <AppHeader></AppHeader>
+  <!-- 吸顶头部 -->
+  <AppHeaderSticky></AppHeaderSticky>
+  <!-- 内容容器 -->
+  <div class="app-body">
     <!-- 二级路由 -->
     <router-view></router-view>
-  </main>
-  <!-- app-footer -->
-  <app-footer></app-footer>
+  </div>
+  <!-- 底部组件 -->
+  <AppFooter></AppFooter>
 </template>
 
 <script>
 import AppTopNav from "@/components/app-top-nav.vue";
 import AppHeader from "@/components/app-header.vue";
 import AppFooter from "@/components/app-footer.vue";
+import AppHeaderSticky from "@/components/app-header-sticky.vue";
 
 import { useStore } from "vuex";
 
@@ -24,6 +28,7 @@ export default {
     AppTopNav,
     AppHeader,
     AppFooter,
+    AppHeaderSticky,
   },
   // 获取下分类数据
   setup() {
@@ -33,4 +38,8 @@ export default {
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.app-body {
+  min-height: 600px;
+}
+</style>

@@ -5,7 +5,6 @@
         <a href="#"></a>
       </h1>
       <AppHeaderNav />
-      <AppHeaderSticky />
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜" />
@@ -22,12 +21,10 @@
 
 <script>
 import AppHeaderNav from "./app-header-nav.vue";
-import AppHeaderSticky from "./app-header-sticky.vue";
 export default {
   name: "AppHeader",
   components: {
     AppHeaderNav,
-    AppHeaderSticky,
   },
 };
 </script>
