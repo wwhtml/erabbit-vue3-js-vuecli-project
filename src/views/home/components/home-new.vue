@@ -2,13 +2,13 @@
   <div class="home-new">
     <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
       <template v-slot:right><XtxMore /></template>
-      <div style="position: relative; height: 406px">
+      <div ref="box" style="position: relative; height: 406px">
         <Transition name="fade">
           <ul v-if="goods.length" class="goods-list">
             <li v-for="item in goods" :key="item.id">
               <RouterLink to="/">
                 <img :src="item.picture" alt="" />
-                <p class="name">{{ item.name }}</p>
+                <p class="name ellipsis">{{ item.name }}</p>
                 <p class="price">&yen;{{ item.price }}</p>
               </RouterLink>
             </li>
@@ -20,19 +20,30 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
 import HomePanel from "./home-panel.vue";
 import HomeSkeleton from "./home-skeleton.vue";
+
+import { ref } from "vue";
+
 import { findNew } from "@/api/home";
+
+import { useIntersectionObserver } from "@vueuse/core";
+
 export default {
   name: "HomeNew",
   components: { HomePanel, HomeSkeleton },
   setup() {
     const goods = ref([]);
-    findNew().then((data) => {
-      goods.value = data.result;
+    const box = ref(null);
+    const { stop } = useIntersectionObserver(box, ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        stop();
+        findNew().then((data) => {
+          goods.value = data.result;
+        });
+      }
     });
-    return { goods };
+    return { goods, box };
   },
 };
 </script>
