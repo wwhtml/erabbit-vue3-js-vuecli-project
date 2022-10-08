@@ -2,7 +2,7 @@
   <div class="home-new">
     <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
       <template v-slot:right><XtxMore /></template>
-      <div ref="target" style="position: relative; height: 406px">
+      <div ref="box" style="position: relative; height: 406px">
         <Transition name="fade">
           <ul v-if="goods.length" class="goods-list">
             <li v-for="item in goods" :key="item.id">
@@ -23,16 +23,27 @@
 import HomePanel from "./home-panel.vue";
 import HomeSkeleton from "./home-skeleton.vue";
 
+import { ref } from "vue";
+
 import { findNew } from "@/api/home";
 
-import { useLazyData } from "@/hooks";
+import { useIntersectionObserver } from "@vueuse/core";
 
 export default {
   name: "HomeNew",
   components: { HomePanel, HomeSkeleton },
   setup() {
-    const { target, result } = useLazyData(findNew);
-    return { goods: result, target };
+    const goods = ref([]);
+    const box = ref(null);
+    const { stop } = useIntersectionObserver(box, ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        stop();
+        findNew().then((data) => {
+          goods.value = data.result;
+        });
+      }
+    });
+    return { goods, box };
   },
 };
 </script>

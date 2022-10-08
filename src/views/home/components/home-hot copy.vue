@@ -1,6 +1,6 @@
 <template>
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <div ref="target" style="position: relative; height: 426px">
+    <div ref="box" style="position: relative; height: 426px">
       <Transition name="fade">
         <ul v-if="goods.length" class="goods-list">
           <li v-for="item in goods" :key="item.id">
@@ -18,18 +18,31 @@
 </template>
 
 <script>
+import { ref, nextTick } from "vue";
 import HomePanel from "./home-panel.vue";
 import HomeSkeleton from "./home-skeleton.vue";
-
 import { findHot } from "@/api/home";
-import { useLazyData } from "@/hooks";
+import { useIntersectionObserver } from "@vueuse/core";
 
 export default {
   name: "HomeNew",
   components: { HomePanel, HomeSkeleton },
   setup() {
-    const { target, result } = useLazyData(findHot);
-    return { target, goods: result };
+    const goods = ref([]);
+
+    const box = ref(null);
+    nextTick(() => {
+      console.log(box);
+    });
+    const { stop } = useIntersectionObserver(box, ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        stop();
+        findHot().then((data) => {
+          goods.value = data.result;
+        });
+      }
+    });
+    return { goods, box };
   },
 };
 </script>
