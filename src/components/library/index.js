@@ -3,18 +3,38 @@
 // vue2.0插件写法要素：导出一个对象，有install函数，默认传入了Vue构造函数，Vue基础之上扩展
 // vue3.0插件写法要素：导出一个对象，有install函数，默认传入了app应用实例，app基础之上扩展
 
-import XtxSkeleton from "./xtx-skeleton.vue";
-import XtxCarousel from "./xtx-carousel.vue";
-import XtxMore from "./xtx-more.vue";
+// import XtxSkeleton from "./xtx-skeleton.vue";
+// import XtxCarousel from "./xtx-carousel.vue";
+// import XtxMore from "./xtx-more.vue";
+// import XtxBread from "./xtx-bread.vue";
+// import XtxBreadItem from "./xtx-bread-item.vue";
+
+const importFn = require.context("./", false, /\.vue$/);
 import defaultImg from "../../assets/images/200.png";
+
+// console.dir(importFn);
+// console.dir(importFn.keys());
 
 export default {
   install(app) {
     // 在app上进行扩展，app提供 component directive 函数
     // 如果要挂载原型 app.config.globalProperties 方式
-    app.component(XtxSkeleton.name, XtxSkeleton);
-    app.component(XtxCarousel.name, XtxCarousel);
-    app.component(XtxMore.name, XtxMore);
+    // app.component(XtxSkeleton.name, XtxSkeleton);
+    // app.component(XtxCarousel.name, XtxCarousel);
+    // app.component(XtxMore.name, XtxMore);
+    // app.component(XtxBread.name, XtxBread);
+    // app.component(XtxBreadItem.name, XtxBread);
+
+    // 批量注册全局组件
+    importFn.keys().forEach((key) => {
+      // console.log(key);
+      console.log(importFn(key));
+      // // 导入组件
+      const component = importFn(key).default;
+      // 注册组件
+      app.component(component.name, component);
+    });
+
     defineDirective(app);
   },
 };
