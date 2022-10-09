@@ -9,9 +9,9 @@
 // import XtxBread from "./xtx-bread.vue";
 // import XtxBreadItem from "./xtx-bread-item.vue";
 
-const importFn = require.context("./", false, /\.vue$/);
 import defaultImg from "../../assets/images/200.png";
 
+const importFn = require.context("./", false, /\.vue$/);
 // console.dir(importFn);
 // console.dir(importFn.keys());
 
