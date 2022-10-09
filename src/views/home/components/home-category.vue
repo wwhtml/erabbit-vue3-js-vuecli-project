@@ -41,7 +41,7 @@
       >
         <li v-for="item in currCategory.goods" :key="item.id">
           <RouterLink to="/">
-            <img :src="item.picture" alt="" />
+            <img v-lazy="item.picture" alt="" />
             <div class="info">
               <p class="name ellipsis-2">{{ item.name }}</p>
               <p class="desc ellipsis">{{ item.desc }}</p>
