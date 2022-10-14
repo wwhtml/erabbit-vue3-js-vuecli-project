@@ -24,7 +24,6 @@
           </li>
         </ul>
       </div>
-      <!-- 不同分类商品 -->
       <!-- 分类关联商品 -->
       <div class="ref-goods" v-for="item in subList" :key="item.id">
         <div class="head">
