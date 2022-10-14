@@ -28,7 +28,7 @@ export default {
     // 批量注册全局组件
     importFn.keys().forEach((key) => {
       // console.log(key);
-      console.log(importFn(key));
+      // console.log(importFn(key));
       // // 导入组件
       const component = importFn(key).default;
       // 注册组件
