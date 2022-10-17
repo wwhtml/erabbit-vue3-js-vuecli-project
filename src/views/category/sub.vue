@@ -86,6 +86,7 @@ export default {
       reqParams = { ...reqParams, ...sortParams };
       reqParams.page = 1;
       goodsList.value = [];
+      console.log(111);
     };
     // 2. 更改筛选组件的筛选数据，重新请求
     const filterChange = (filterParams) => {
