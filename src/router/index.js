@@ -4,6 +4,8 @@ const Layout = () => import("@/views/Layout.vue");
 const Home = () => import("@/views/home/index.vue");
 import TopCategory from "@/views/category";
 import SubCategory from "@/views/category/sub";
+const Goods = () => import("@/views/goods/index");
+
 const routes = [
   {
     path: "/",
@@ -12,6 +14,7 @@ const routes = [
       { path: "/", component: Home },
       { path: "/category/:id", component: TopCategory },
       { path: "/category/sub/:id", component: SubCategory },
+      { path: "/product/:id", component: Goods },
     ],
   },
 ];
