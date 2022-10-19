@@ -6,7 +6,7 @@
 import axios from "axios";
 import store from "@/store";
 import router from "@/router";
-const baseURL =
+export const baseURL =
   process.env.NODE_ENV === "production"
     ? process.env.VUE_APP_APIURL
     : process.env.VUE_APP_FLAG;
