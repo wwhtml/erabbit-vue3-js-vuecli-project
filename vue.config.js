@@ -48,6 +48,15 @@ module.exports = defineConfig({
   //   config.devServer.disableHostCheck(true);
   // },
 
+  //上述方式不能用了，使用下面的方式images 是src/assets下的文件夹
+  chainWebpack: (config) => {
+    config.module.rule("images").set("parser", {
+      dataUrlCondition: {
+        maxSize: 1 * 1024, // 4KiB
+      },
+    });
+  },
+
   configureWebpack: {
     externals: {
       qc: "QC",
