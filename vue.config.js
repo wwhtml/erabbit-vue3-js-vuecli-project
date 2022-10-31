@@ -3,7 +3,10 @@ const path = require("path");
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
-    port: 8989,
+    host: "0.0.0.0",
+    // 开启IP域名访问
+    allowedHosts: "all", //这样就可以在本地通过host文件，设置代理了
+    port: 8080, //qq登录密匙绑定的是8080，所以必须是8080
     proxy: {
       [process.env.VUE_APP_FLAG]: {
         target: process.env.VUE_APP_APIURL,

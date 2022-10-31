@@ -42,6 +42,7 @@ export default {
     // 存储回跳地址
     const store = useStore();
     const route = useRoute();
+    console.log(route.query.redirectUrl);
     store.commit("user/setRedirectUrl", route.query.redirectUrl || "/");
 
     return { activeName };
